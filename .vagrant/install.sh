@@ -8,6 +8,9 @@ bash setup-ius.sh
 # Устанавливаем Vim
 yum install vim
 
+# Устанавливаем nano
+yum install nano -y
+
 # Удаляем все версии php-fpm php-cli php-common
 yum remove php-fpm php-cli php-common -y
 
@@ -18,11 +21,6 @@ yum install php70u-fpm-nginx php70u-cli php70u-mysqlnd -y
 \cp /home/www/.vagrant/www.conf /etc/php-fpm.d/
 \cp /home/www/.vagrant/php-fpm.conf /etc/nginx/conf.d/
 \cp /home/www/.vagrant/nginx.conf /etc/nginx/
-
-
-Заменить файл /etc/php-fpm.d/www.conf
-Заменить файл /etc/nginx/conf.d/php-fpm.conf
-Заменить файл /etc/nginx/nginx.conf
 
 # Устанавливаем расширения для php
 yum install gcc make -y
