@@ -34,6 +34,15 @@
 
 > vagrant status
 
+### Подключится по SSH под пользователем vagrant (Пароль не нужен сам зайдет)
+
+> vagrant ssh
+
+### Подключится под пользователем root
+
+> ssh root@{{IP}}
+> pass: vagrant
+
 ### Узнать какие команды есть еше :)
 
 > vagrant help
