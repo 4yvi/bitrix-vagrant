@@ -98,6 +98,9 @@ systemctl start mariadb
 # Установка Redis
 #yum install redis -y
 
+# Установка Memcached
+#yum install memcached -y
+
 #Создаем пользователя в mySQL
 mysql -u root -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant';"
 mysql -u root -e "GRANT ALL PRIVILEGES ON * . * TO 'vagrant'@'localhost';"
