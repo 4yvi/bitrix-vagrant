@@ -21,6 +21,7 @@ yum install php70u-fpm-nginx php70u-cli php70u-mysqlnd -y
 \cp /home/www/.vagrant/www.conf /etc/php-fpm.d/
 \cp /home/www/.vagrant/php-fpm.conf /etc/nginx/conf.d/
 \cp /home/www/.vagrant/nginx.conf /etc/nginx/
+# TODO: добавить php.ini
 
 # Устанавливаем расширения для php
 yum install gcc make -y
@@ -81,7 +82,14 @@ yum install mariadb-server mariadb-client -y
 systemctl start mariadb
 
 # Установка Redis
-yum install redis -y
+#yum install redis -y
+
+#Создаем пользователя в mySQL
+mysql -u root -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON * . * TO 'vagrant'@'localhost';"
+
+# Создаем базу vagrant
+mysql -u root -e "CREATE DATABASE vagrant"
 
 # Автозагрузка
 systemctl enable php-fpm
