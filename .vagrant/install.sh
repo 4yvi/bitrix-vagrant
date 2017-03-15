@@ -6,10 +6,17 @@ curl 'https://setup.ius.io/' -o setup-ius.sh
 bash setup-ius.sh
 
 # Устанавливаем Vim
-yum install vim
+yum install vim -y
 
 # Устанавливаем nano
 yum install nano -y
+
+# Устанавливаем время
+yum -y install tzdata -y
+mv /etc/localtime /etc/localtime.bak
+ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+yum -y install ntp -y
+systemctl start ntpd
 
 # Удаляем все версии php-fpm php-cli php-common
 yum remove php-fpm php-cli php-common -y
@@ -17,11 +24,18 @@ yum remove php-fpm php-cli php-common -y
 # Устанавливем PHP 7
 yum install php70u-fpm-nginx php70u-cli php70u-mysqlnd -y
 
+# Устаннавливаем права на папку /var/lib/nginx
+chown -R vagrant:vagrant /var/lib/nginx
+
+# Создаем папку tmp для php
+mkdir /home/www/tmp
+
 # Настраиваем PHP 7 для работы с Nginx
 \cp /home/www/.vagrant/www.conf /etc/php-fpm.d/
 \cp /home/www/.vagrant/php-fpm.conf /etc/nginx/conf.d/
 \cp /home/www/.vagrant/nginx.conf /etc/nginx/
 # TODO: добавить php.ini
+# TODO: добавить конфиг бд
 
 # Устанавливаем расширения для php
 yum install gcc make -y
@@ -95,3 +109,4 @@ mysql -u root -e "CREATE DATABASE vagrant"
 systemctl enable php-fpm
 systemctl enable nginx
 systemctl enable mariadb.service
+systemctl enable ntpd
