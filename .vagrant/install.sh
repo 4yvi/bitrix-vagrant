@@ -30,13 +30,6 @@ chown -R vagrant:vagrant /var/lib/nginx
 # Создаем папку tmp для php
 mkdir /home/www/tmp
 
-# Настраиваем PHP 7 для работы с Nginx
-\cp /home/www/.vagrant/www.conf /etc/php-fpm.d/
-\cp /home/www/.vagrant/php-fpm.conf /etc/nginx/conf.d/
-\cp /home/www/.vagrant/nginx.conf /etc/nginx/
-# TODO: добавить php.ini
-# TODO: добавить конфиг бд
-
 # Устанавливаем расширения для php
 yum install gcc make -y
 yum install php70u-pear php-devel -y
@@ -107,6 +100,13 @@ mysql -u root -e "GRANT ALL PRIVILEGES ON * . * TO 'vagrant'@'localhost';"
 
 # Создаем базу vagrant
 mysql -u root -e "CREATE DATABASE vagrant"
+
+# Копируем конфиги
+\cp /home/www/.vagrant/www.conf /etc/php-fpm.d/
+\cp /home/www/.vagrant/php-fpm.conf /etc/nginx/conf.d/
+\cp /home/www/.vagrant/nginx.conf /etc/nginx/
+\cp /home/www/.vagrant/php.ini /etc/
+\cp /home/www/.vagrant/server.cnf /etc/my.cnf.d/
 
 # Автозагрузка
 systemctl enable php-fpm
