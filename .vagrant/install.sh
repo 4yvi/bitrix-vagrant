@@ -89,10 +89,10 @@ yum install mariadb-server mariadb-client -y
 systemctl start mariadb
 
 # Установка Redis
-#yum install redis -y
+yum install redis -y
 
 # Установка Memcached
-#yum install memcached -y
+yum install memcached -y
 
 #Создаем пользователя в mySQL
 mysql -u root -e "CREATE USER 'vagrant'@'localhost' IDENTIFIED BY 'vagrant';"
